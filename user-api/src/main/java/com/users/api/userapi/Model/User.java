@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 import lombok.Setter;
 
 @Entity
@@ -18,8 +19,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,5 +33,8 @@ public class User implements Serializable {
   private String postalCode;
   private String address;
 
+  public User() {
+
+  }
 
 }
