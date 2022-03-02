@@ -46,11 +46,12 @@ public class UserController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Object> updateUser(@PathVariable("id") UUID id, @RequestBody User user) {
-    return ResponseEntity.ok().body(userService.saveUser(user));
+    return ResponseEntity.ok().body(userService.updateUser(id, user));
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Object> deleteUser(@PathVariable("id") UUID id) {
+    userService.deleteUser(id);
     return ResponseEntity.noContent().build();
   }
 
