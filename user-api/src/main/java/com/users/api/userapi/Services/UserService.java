@@ -1,6 +1,7 @@
 package com.users.api.userapi.Services;
 
 import java.util.List;
+
 import java.util.UUID;
 
 import com.users.api.userapi.Model.User;
@@ -20,12 +21,13 @@ public class UserService {
     return userRepository.findAll();
   }
 
-  public User getUser(UUID id) {
-    return userRepository.getById(id);
+  public Object getUser(UUID id) {
+    return userRepository.findById(id);
   }
 
   public User saveUser(User user) {
-    return userRepository.save(user);
+    userRepository.save(user);
+    return user;
   }
 
   public User updateUser(UUID id, User user) {
