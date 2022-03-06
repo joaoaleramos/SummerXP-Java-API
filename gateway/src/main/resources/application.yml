@@ -16,18 +16,18 @@ spring:
         lowerCaseServiceId: true
     routes:
       - id: USERS-API
-        uri: localhost:8081
+        uri: http://localhost:8081/
         predicates:
           - Path=/users/**
       - id: PRODUCTS-API
-        uri: lb://PRODUCTS-API
+        uri: http://localhost:8082/
         predicates:
           - Path=/products/**
       - id: PAYMENT-API
-        uri: localhost:8083
+        uri: http://localhost:8083/
         predicates:
           - Path=/payment/**
       - id: ORDERS-API
-        uri: localhost:8084
+        uri: http://localhost:8084/
         predicates:
           - Path=/orders/**
