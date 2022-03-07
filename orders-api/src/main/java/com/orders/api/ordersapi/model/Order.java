@@ -1,15 +1,15 @@
-package com.products.api.productsapi.model;
+package com.orders.api.ordersapi.model;
 
-import java.io.Serializable;
-import java.util.UUID;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,22 +17,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_product")
+@Table(name = "tb_order")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotBlank(message = "Please, enter a name")
-    private String name;
-
-    // @NotBlank(message = "Please, enter a price")
+    @JsonProperty
     private BigDecimal price;
+
+    @JsonProperty
+    private UUID userID;
+
+    @JsonProperty
+    private UUID productIDs[];
 
 }

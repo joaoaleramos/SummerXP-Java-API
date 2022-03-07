@@ -48,31 +48,32 @@ public class UserController {
       return errors;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<Object> getUsers() {
-      return ResponseEntity.ok().body(userService.getAllUsers());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getUser(@PathVariable("id") UUID id) {
-      return ResponseEntity.ok().body(userService.getUser(id));
-    }
-
-    @PostMapping("/")
-    public ResponseEntity<Object> createUser(@RequestBody @Valid User user) {
-      return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.saveUser(user));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable("id") UUID id, @RequestBody User user) {
-      return ResponseEntity.ok().body(userService.updateUser(id, user));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable("id") UUID id) {
-      userService.deleteUser(id);
-      return ResponseEntity.noContent().build();
-    }
-
   }
+
+  @GetMapping("/")
+  public ResponseEntity<Object> getUsers() {
+    return ResponseEntity.ok().body(userService.getAllUsers());
+  }
+
+  @PostMapping("/post/")
+  public ResponseEntity<Object> createUser(@RequestBody @Valid User user) {
+    return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.saveUser(user));
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Object> getUser(@PathVariable("id") UUID id) {
+    return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getUser(id));
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Object> deleteUser(@PathVariable("id") UUID id) {
+    userService.deleteUser(id);
+    return ResponseEntity.noContent().build();
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Object> updateUser(@PathVariable("id") UUID id, @RequestBody @Valid User user) {
+    return ResponseEntity.ok().body(userService.updateUser(id, user));
+  }
+
 }

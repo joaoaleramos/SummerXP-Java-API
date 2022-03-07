@@ -1,6 +1,7 @@
 package com.products.api.productsapi.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.products.api.productsapi.model.Product;
@@ -20,8 +21,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProduct(UUID id) {
-        return productRepository.getById(id);
+    public Optional<Product> getProduct(UUID id) {
+        return productRepository.findById(id);
     }
 
     public Product saveProduct(Product product) {

@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class User implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -55,9 +55,5 @@ public class User implements Serializable {
   @NotBlank(message = "Please, enter address")
   @JsonProperty
   private String address;
-
-  public User() {
-
-  }
 
 }

@@ -26,8 +26,7 @@ public class UserService {
   }
 
   public User saveUser(User user) {
-    userRepository.save(user);
-    return user;
+    return userRepository.save(user);
   }
 
   public User updateUser(UUID id, User user) {
