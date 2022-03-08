@@ -1,45 +1,38 @@
-package com.api.paymentapi.Model;
+package com.orders.api.ordersapi.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "tb_payment")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Payment {
+public class Payment implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    // @NotBlank(message = "Please, enter card number")
     private String cardNumber;
 
-    // @NotBlank(message = "Please, enter cvv number")
     private String cvv;
 
-    // @NotBlank(message = "Please, enter owner")
     private String owner;
 
-    // @NotBlank(message = "Please, enter experation date")
     private String expirationDate;
 
-    // @NotBlank(message = "Please, enter price")
     private BigDecimal price;
-
 }

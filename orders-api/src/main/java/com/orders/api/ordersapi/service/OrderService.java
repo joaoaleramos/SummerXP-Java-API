@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import com.orders.api.ordersapi.client.PaymentFeignClient;
 import com.orders.api.ordersapi.client.ProductFeignClient;
 import com.orders.api.ordersapi.client.UserFeignClient;
 import com.orders.api.ordersapi.model.Order;
+import com.orders.api.ordersapi.model.Payment;
 import com.orders.api.ordersapi.model.Product;
 import com.orders.api.ordersapi.repository.OrderRepository;
 import java.util.UUID;
@@ -25,6 +27,9 @@ public class OrderService {
 
     @Autowired
     ProductFeignClient productFeignClient;
+
+    @Autowired
+    PaymentFeignClient paymentFeignClient;
 
     public List<Order> getAllOrder() {
         return orderRepository.findAll();
@@ -60,5 +65,14 @@ public class OrderService {
 
         }
         return totalPrice;
+    }
+
+    public boolean verifyPayment(Payment payment, UUID[] ids) {
+        payment.setPrice(getPrices(ids));
+        payment.setId(UUID.randomUUID());
+        if (paymentFeignClient.savePayment(payment).getStatusCodeValue() != 201) {
+            return false;
+        }
+        return true;
     }
 }

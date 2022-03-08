@@ -56,7 +56,7 @@ public class PaymentController {
 
     @PostMapping("/post/")
     public ResponseEntity<Object> savePayment(@RequestBody Payment payment) {
-        return ResponseEntity.ok().body(paymentService.savePayment(payment));
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.savePayment(payment));
     }
 
     @PutMapping("/{id}")

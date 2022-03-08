@@ -39,12 +39,12 @@ public class User implements Serializable {
   private String name;
 
   @JsonProperty
-  @Email(message = "Please, enter valid email")
+  // @Email(message = "Please, enter valid email")
   @NotBlank(message = "Please, enter email")
   private String email;
 
   @NotBlank(message = "Please, enter cpf")
-  @CPF(message = "Please, enter a valid CPF")
+  // @CPF(message = "Please, enter a valid CPF")
   @JsonProperty
   private String cpf;
 

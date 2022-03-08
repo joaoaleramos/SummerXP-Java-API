@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import java.util.UUID;
 
 import com.orders.api.ordersapi.model.Order;
+import com.orders.api.ordersapi.model.Payment;
 import com.orders.api.ordersapi.service.OrderService;
 
 @RestController
@@ -36,8 +37,12 @@ public class OrderController {
 
     @PostMapping("/post/")
     public ResponseEntity<Object> saveOrder(@RequestBody Order order) {
+        orderService.getPrices(order.getProductIDs());
         if (orderService.verifyUser(order.getUserID()) == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This user doesn't exist");
+        }
+        if (!orderService.verifyPayment(order.getPayment(), order.getProductIDs())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Payment not authorized");
         }
         return ResponseEntity.ok().body(orderService.saveOrder(order));
     }
