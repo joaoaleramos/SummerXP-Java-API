@@ -32,22 +32,16 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  @RestController
-  @RequestMapping("/api/cliente")
-  public class ClienteController {
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-      Map<String, String> errors = new HashMap<>();
-      ex.getBindingResult().getAllErrors().forEach((error) -> {
-        String fieldName = ((FieldError) error).getField();
-        String errorMessage = error.getDefaultMessage();
-        errors.put(fieldName, errorMessage);
-      });
-      return errors;
-    }
-
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    Map<String, String> errors = new HashMap<>();
+    ex.getBindingResult().getAllErrors().forEach((error) -> {
+      String fieldName = ((FieldError) error).getField();
+      String errorMessage = error.getDefaultMessage();
+      errors.put(fieldName, errorMessage);
+    });
+    return errors;
   }
 
   @GetMapping("/")
@@ -57,6 +51,9 @@ public class UserController {
 
   @PostMapping("/post/")
   public ResponseEntity<Object> createUser(@RequestBody @Valid User user) {
+    if (!userService.equalUsers(user)) {
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("This user already exists.");
+    }
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.saveUser(user));
   }
 

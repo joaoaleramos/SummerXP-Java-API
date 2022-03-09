@@ -1,6 +1,7 @@
 package com.users.api.userapi.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -10,10 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,29 +34,28 @@ public class User implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @JsonProperty
   private UUID id;
 
-  @JsonProperty
   @NotBlank(message = "Please, enter name")
   private String name;
 
-  @JsonProperty
-  // @Email(message = "Please, enter valid email")
+  @Email(message = "Please, enter valid email")
   @NotBlank(message = "Please, enter email")
   private String email;
 
   @NotBlank(message = "Please, enter cpf")
-  // @CPF(message = "Please, enter a valid CPF")
-  @JsonProperty
+  @CPF(message = "Please, enter a valid CPF")
   private String cpf;
 
   @NotBlank(message = "Please, enter postal code")
-  @JsonProperty
   private String postalCode;
 
   @NotBlank(message = "Please, enter address")
-  @JsonProperty
   private String address;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  @JsonFormat(pattern = "dd/MM/yy")
+  @Past(message = "Date must be valid")
+  private Date birthDate;
 
 }

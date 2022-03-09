@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public class Product implements Serializable {
     @NotBlank(message = "Please, enter a name")
     private String name;
 
-    // @NotBlank(message = "Please, enter a price")
+    @NotNull(message = "Please, enter a price")
     private BigDecimal price;
 
 }

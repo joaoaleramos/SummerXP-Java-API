@@ -39,4 +39,14 @@ public class UserService {
     userRepository.deleteById(id);
   }
 
+  public boolean equalUsers(User user) {
+    List<User> users = getAllUsers();
+    for (User i : users) {
+      if (i.getCpf().equals(user.getCpf()) || i.getEmail().equals(user.getEmail())) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 }
